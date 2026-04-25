@@ -32,24 +32,23 @@ public class WeaponKnife : MonoBehaviour
         }
     }
 
-    void Fire() {
-        if (canFire == false) return;
-
+    void Fire()
+    {
         nextFireTime = Time.time + fireRate;
 
-        // hit-scan raycast
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(
+            new Vector3(Screen.width / 2f, Screen.height / 2f, 0f)
+        );
 
-        Debug.DrawRay(ray.origin, ray.direction * Range, Color.yellow, 0.5f);
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
 
-        if (Physics.Raycast(ray, out hit, Range)) {
-            Debug.DrawRay(ray.origin, ray.direction * Range, Color.green, 1f);
-            Debug.Log("KnifeHit: " + hit.collider.name);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        {
+            Debug.DrawLine(ray.origin, hit.point, Color.green, 1f);
+            Debug.Log("Hit: " + hit.collider.name);
 
-            // zombie stuff..
+            //ZombieHealth zombie = hit.collider.GetComponent<ZombieHealth>();
+            //if (zombie != null) zombie.TakeDamage(damage);
         }
-
-        canFire = true;        
     }
 }

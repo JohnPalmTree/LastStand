@@ -8,20 +8,32 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 velocity;
+    private float xRotation = 0f;
+    private Transform cam;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        //Cursor.lockState = CursorLockMode.Locked;
+        cam = Camera.main.transform;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        // Horizontal rotation from mouse
+        // Mouse look
         float mouseX = Input.GetAxis("Mouse X") * mouseSens * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSens * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        // Camera looks up and down
+        cam.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        // Player body turns left and right
         transform.Rotate(Vector3.up * mouseX);
 
-        // Movement relative to player facing
+        // Movement
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         Vector3 move = transform.right * x + transform.forward * z;
