@@ -10,7 +10,7 @@ public class ZombieAI : MonoBehaviour
 
     private float nextAttackTime = 0f;
     private NavMeshAgent agent;
-    private transform player;
+    private Transform player;
 
     public enum ZombieState { Chasing, Attacking, Dead }
     public ZombieState state = ZombieState.Chasing;
@@ -18,7 +18,7 @@ public class ZombieAI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        agent = GetComponent<NavmeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player").transform;
     }
 
@@ -32,7 +32,7 @@ public class ZombieAI : MonoBehaviour
         if (distFromPlr <= attackRange) 
         {
             state = ZombieState.Attacking;
-            agent.SetDestination(transform.position;) // stop moving when attacking.
+            agent.SetDestination(transform.position); // stop moving when attacking.
             Attack();
         } 
         else 
@@ -47,7 +47,7 @@ public class ZombieAI : MonoBehaviour
         if (Time.time >= nextAttackTime)
         {
             nextAttackTime = Time.time + attackRate;
-            Debug.Log("zombie attacks")
+            Debug.Log("zombie attacks");
 
             // hook to player health later...
         }
@@ -56,8 +56,8 @@ public class ZombieAI : MonoBehaviour
     public void onDeath()
     {
         state = ZombieState.Dead;
-        agent.SetDestination(transform.position)
-        Debug.log("Zombie died.");
-        Destroy(GameObject, 2f); // room for animation, if needed
+        agent.SetDestination(transform.position);
+        Debug.Log("Zombie died.");
+        Destroy(gameObject, 2f); // room for animation, if needed
     }
 }
