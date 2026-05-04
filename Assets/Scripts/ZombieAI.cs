@@ -9,7 +9,7 @@ public class ZombieAI : MonoBehaviour
     public float attackRate = 1f;
 
     private float nextAttackTime = 0f;
-    private NavMeshAgent agent;
+    public  NavMeshAgent agent;
     private Transform player;
 
     public enum ZombieState { Chasing, Attacking, Dead }
@@ -57,7 +57,7 @@ public class ZombieAI : MonoBehaviour
     {
         state = ZombieState.Dead;
         agent.SetDestination(transform.position);
-        Debug.Log("Zombie died.");
+        //Debug.Log("Zombie died.");
         Destroy(gameObject, 2f); // room for animation, if needed
     }
 }

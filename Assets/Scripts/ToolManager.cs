@@ -27,13 +27,13 @@ public class ToolManager : MonoBehaviour
         gun.SetActive(true); // i think this is how you enable/disable gameobj's but look @ the documentation after work
         knife.SetActive(false);
         gunEquipped = true;
-        Debug.Log("Equipped M1911.");
+        //Debug.Log("Equipped M1911.");
     }
 
     void equipKnife() {
         gun.SetActive(false); // i think this is how you enable/disable gameobj's but look @ the documentation after work
         knife.SetActive(true);
         gunEquipped = false;
-        Debug.Log("Equipped Knife.");
+        //Debug.Log("Equipped Knife.");
     }
 }

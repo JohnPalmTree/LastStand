@@ -3,9 +3,9 @@ using UnityEngine;
 public class WeaponM1911 : MonoBehaviour
 {
     [Header("Stats")]
-    public int damage = 15;
+    public int damage = 50; // typically 15
     public int magSize = 7;
-    public int maxMags = 7;
+    public int maxMags = 22; // typically 7
     public float fireRate = 0.5f;
     public float reloadTime = 1.5f;
 
@@ -56,10 +56,10 @@ public class WeaponM1911 : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.green, 1f);
-            Debug.Log("Hit: " + hit.collider.name);
+            //Debug.Log("Hit: " + hit.collider.name);
 
-            //ZombieHealth zombie = hit.collider.GetComponent<ZombieHealth>();
-            //if (zombie != null) zombie.TakeDamage(damage);
+            ZombieHealth zombie = hit.collider.GetComponentInParent<ZombieHealth>();
+            if (zombie != null) zombie.TakeDamage(damage);
         }
     }
 

@@ -19,14 +19,14 @@ public class WeaponKnife : MonoBehaviour
         nextFireTime = 0f;
         canFire = true;
 
-        Debug.Log("loading knife...");
+        //Debug.Log("loading knife...");
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Fire") && Time.time >= nextFireTime) {
-            Debug.Log("fire?");
+            //Debug.Log("fire?");
                 
             Fire();
         }
@@ -45,10 +45,10 @@ public class WeaponKnife : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.green, 1f);
-            Debug.Log("Hit: " + hit.collider.name);
+            //Debug.Log("Hit: " + hit.collider.name);
 
-            //ZombieHealth zombie = hit.collider.GetComponent<ZombieHealth>();
-            //if (zombie != null) zombie.TakeDamage(damage);
+            ZombieHealth zombie = hit.collider.GetComponent<ZombieHealth>();
+            if (zombie != null) zombie.TakeDamage(dmg);
         }
     }
 }
