@@ -83,14 +83,6 @@ public class WaveSystem : MonoBehaviour
         StartCoroutine(SpawnWave(data, zombiesQueued));
     }
 
-    IEnumerator IntermissionWaitForWave() {
-        Debug.Log("Waiting for wave...");
-        currentState = WaveStates.Spawn;
-        roundNumber++;
-        yield return new WaitForSeconds(15.0f);
-        startWave(roundNumber);
-    }
-
     IEnumerator SpawnWave(WaveData data, int zombiesQueued) {
         //Debug.Log("test1.1");
 
@@ -137,24 +129,23 @@ public class WaveSystem : MonoBehaviour
         currentState = WaveStates.Intermission;
         Debug.Log("Wave complete! Starting intermission...");
 
-        StartCoroutine(IntermissionWaitForWave());
+        StartCoroutine(IntermissionCountdown());
     }
-/*
-    public void onZombieDied() {
-        zombiesAlive--;
-        Debug.Log("Zombies Remaining: " + zombiesAlive);
 
-        if (zombiesAlive == 0 && zombiesQueued == 0) {
-            StartIntermission();
+    IEnumerator IntermissionCountdown()
+    {
+        float timer = 15f;
+
+        while (timer > 0f)
+        {
+            timer -= Time.deltaTime;
+            Debug.Log("Next wave in: " + Mathf.CeilToInt(timer));
+            yield return null;
         }
-    }
 
-    public void StartIntermission() {
-        currentState = waveStates.Intermission;
-        waveNum++;
-        wait(15);
-        startWave(waveNum);
+        roundNumber++;
+        currentState = WaveStates.Spawn;
+        startWave(roundNumber);
     }
-    */
 }
 

@@ -47,9 +47,11 @@ public class ZombieAI : MonoBehaviour
         if (Time.time >= nextAttackTime)
         {
             nextAttackTime = Time.time + attackRate;
-            Debug.Log("zombie attacks");
 
-            // hook to player health later...
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            if (playerHealth != null) playerHealth.TakeDamage(damage);
+
+            Debug.Log("zombie attacks player for [" + damage + "] damage");
         }
     }
 
