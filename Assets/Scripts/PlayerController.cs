@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;  
+
+        cam.localPosition = new Vector3(0f, 0.8f, 0f);
+        cam.localRotation = Quaternion.identity;
     }
 
     void Update()

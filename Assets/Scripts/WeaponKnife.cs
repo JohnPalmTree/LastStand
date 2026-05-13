@@ -42,12 +42,11 @@ public class WeaponKnife : MonoBehaviour
 
         Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        if (Physics.Raycast(ray, out RaycastHit hit, Range))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.green, 1f);
-            //Debug.Log("Hit: " + hit.collider.name);
 
-            ZombieHealth zombie = hit.collider.GetComponent<ZombieHealth>();
+            ZombieHealth zombie = hit.collider.GetComponentInParent<ZombieHealth>();
             if (zombie != null) zombie.TakeDamage(dmg);
         }
     }

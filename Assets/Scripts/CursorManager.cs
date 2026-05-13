@@ -34,7 +34,7 @@ public class CursorManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && Cursor.lockState == CursorLockMode.None)
         {
-            LockCursor();
+            UnlockCursor();
         }
     }
 }

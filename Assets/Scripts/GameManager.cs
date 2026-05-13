@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public WaveSystem waveSystem;
+    public HUDManager hud;
 
     public enum GameState { Playing, GameOver };
     public GameState state = GameState.Playing;
@@ -16,6 +17,6 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 0f;
 
-        // screen and replayability maybe?
+        if (hud != null) hud.ShowGameOver(waveSystem.roundNumber + 1);
     }
 }
